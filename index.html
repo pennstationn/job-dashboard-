@@ -3,442 +3,192 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Burcu — Job Search Dashboard</title>
+<title>Job Search — B</title>
 <style>
-  :root {
-    --bg: #ffffff;
-    --bg2: #f7f7f7;
-    --bg3: #efefef;
-    --border: #e0e0e0;
-    --border2: #d0d0d0;
-    --text: #111111;
-    --text2: #555555;
-    --text3: #999999;
-    --accent: #111111;
-    --radius: 10px;
-    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 14px; }
-  .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px 60px; }
-  h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
-  .subtitle { font-size: 13px; color: var(--text3); margin-bottom: 24px; }
-
-  /* TABS */
-  .tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 20px; gap: 0; }
-  .tab { padding: 9px 18px; font-size: 13px; font-weight: 500; color: var(--text2); cursor: pointer; border: none; background: transparent; border-bottom: 2px solid transparent; transition: all .15s; }
-  .tab.active { color: var(--text); border-bottom-color: var(--text); }
-  .tab:hover { color: var(--text); }
-  .panel { display: none; }
-  .panel.active { display: block; }
-
-  /* CONTROLS */
-  .top-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-  .search-input { flex: 1; min-width: 160px; padding: 7px 11px; border-radius: 7px; border: 1px solid var(--border2); background: var(--bg); color: var(--text); font-size: 13px; font-family: var(--font); }
-  .search-input:focus { outline: none; border-color: #888; }
-  .sel { font-size: 12px; padding: 6px 9px; border-radius: 7px; border: 1px solid var(--border2); background: var(--bg); color: var(--text); cursor: pointer; font-family: var(--font); }
-  .cat-row { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 14px; }
-  .f-btn { font-size: 12px; padding: 4px 11px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--text2); cursor: pointer; transition: all .12s; font-family: var(--font); }
-  .f-btn.active, .f-btn:hover { background: var(--bg3); color: var(--text); border-color: var(--border2); }
-
-  /* SECTION LABEL */
-  .sec-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); margin: 20px 0 8px; }
-
-  /* KW GRID */
-  .kw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 7px; }
-  .kw-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; }
-  .kw-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
-  .p-row { display: flex; flex-wrap: wrap; gap: 4px; }
-  .p-btn { font-size: 11px; padding: 2px 8px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--text2); text-decoration: none; display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; transition: background .12s; }
-  .p-btn:hover { background: var(--bg3); color: var(--text); }
-  .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; display: inline-block; }
-  .d-li { background: #0A66C2; } .d-gj { background: #4285F4; } .d-kn { background: #E84040; }
-  .d-hc { background: #FF6B35; } .d-wd { background: #F05537; } .d-sr { background: #17B0A6; }
-  .d-wb { background: #2D72D9; } .d-ic { background: #D4A800; } .d-lv { background: #6B46C1; }
-
-  /* COMPANY GRID */
-  .co-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 7px; }
-  .co-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; }
-  .co-name { font-size: 12px; font-weight: 600; color: var(--text); }
-  .co-sec { font-size: 10px; color: var(--text3); background: var(--bg2); padding: 1px 7px; border-radius: 20px; display: inline-block; width: fit-content; }
-  .badge-row { display: flex; flex-wrap: wrap; gap: 4px; }
-  .badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; border: 1px solid var(--border); color: var(--text2); background: transparent; text-decoration: none; white-space: nowrap; display: inline-flex; align-items: center; gap: 3px; transition: background .12s; }
-  .badge:hover { background: var(--bg3); color: var(--text); }
-
-  /* ALERTS */
-  .info-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 13px 15px; font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 14px; }
-  .info-box strong { color: var(--text); }
-  .alert-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 6px; }
-  .alert-kw { font-size: 12px; font-weight: 500; color: var(--text); flex: 1; }
-  .alert-sub { font-size: 11px; color: var(--text3); font-family: monospace; margin-top: 2px; }
-  .alert-btns { display: flex; gap: 5px; flex-shrink: 0; }
-  .open-all-btn { font-size: 12px; padding: 6px 14px; border-radius: 7px; border: 1px solid var(--border2); background: var(--bg2); color: var(--text2); cursor: pointer; margin-bottom: 14px; font-family: var(--font); transition: background .12s; }
-  .open-all-btn:hover { background: var(--bg3); }
-
-  /* NOTION */
-  .step-box { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px; }
-  .step-num { font-size: 10px; font-weight: 700; color: var(--text3); margin-bottom: 4px; text-transform: uppercase; letter-spacing: .05em; }
-  .step-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-  .step-desc { font-size: 13px; color: var(--text2); line-height: 1.7; }
-  .step-desc code { font-size: 12px; background: var(--bg2); padding: 1px 5px; border-radius: 4px; color: var(--text); }
-  .highlight { border: 2px solid #111; }
-
-  .no-result { color: var(--text3); padding: 1rem 0; font-size: 13px; }
-  .count { font-size: 12px; color: var(--text3); margin-left: 8px; }
+:root{--bg:#f9f8f6;--card:#fff;--border:#e8e6e1;--b2:#d4d0c8;--tx:#1a1917;--t2:#6b6860;--t3:#a8a49c}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia',serif;background:var(--bg);color:var(--tx)}
+.page{max-width:1000px;margin:0 auto;padding:36px 24px 80px}
+header{margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+h1{font-size:20px;font-weight:normal;margin-bottom:3px}
+header p{font-size:12px;color:var(--t3);font-family:'Courier New',monospace}
+.top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.tabs{display:flex}
+.tab{font-size:12px;padding:5px 13px;cursor:pointer;border:1px solid var(--b2);background:transparent;color:var(--t2);font-family:'Courier New',monospace;transition:all .15s}
+.tab:first-child{border-radius:4px 0 0 4px}
+.tab:last-child{border-radius:0 4px 4px 0}
+.tab:not(:last-child){border-right:none}
+.tab.active{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+.ctrl{display:flex;gap:6px}
+input,select{font-size:12px;padding:5px 9px;border:1px solid var(--b2);border-radius:4px;background:var(--card);color:var(--tx);font-family:'Courier New',monospace}
+input{width:150px}input:focus{outline:none;border-color:var(--tx)}
+.panel{display:none}.panel.active{display:block}
+.sec{font-size:10px;font-family:'Courier New',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin:22px 0 7px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:11px 12px}
+.kw{font-size:12px;font-weight:bold;font-family:'Courier New',monospace;margin-bottom:8px;line-height:1.4}
+.btns{display:flex;gap:4px}
+a.btn{font-size:11px;padding:3px 10px;border-radius:3px;text-decoration:none;font-family:'Courier New',monospace;white-space:nowrap;transition:opacity .12s}
+a.btn:hover{opacity:.7}
+.li{background:#dbeafe;color:#1e40af}
+.goo{background:#dcfce7;color:#166534}
+.co-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:6px}
+.co{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:11px 12px}
+.co-n{font-size:12px;font-weight:bold;font-family:'Courier New',monospace;margin-bottom:2px}
+.co-s{font-size:10px;color:var(--t3);font-family:'Courier New',monospace;margin-bottom:8px}
+.hr{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px;background:var(--card);border:1px solid var(--border);border-radius:6px;margin-bottom:5px}
+.hr-kw{font-size:12px;font-family:'Courier New',monospace}
+.legend{font-size:11px;color:var(--t3);font-family:'Courier New',monospace;margin-bottom:10px}
+.empty{font-size:12px;color:var(--t3);font-family:'Courier New',monospace;padding:1rem 0}
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>Job Search Dashboard <span class="count" id="total-count"></span></h1>
-  <p class="subtitle">B's job search · BD & Partnerships · KAM · Commercial · İstanbul</p>
-
+<div class="page">
+<header>
+  <h1>Job Search Dashboard</h1>
+  <p>B · BD & Partnerships · KAM · Commercial · Istanbul</p>
+</header>
+<div class="top">
   <div class="tabs">
-    <button class="tab active" onclick="switchTab('kw',this)">🔍 Keyword Arama</button>
-    <button class="tab" onclick="switchTab('co',this)">🏢 Hedef Şirketler</button>
-    <button class="tab" onclick="switchTab('li',this)">🔵 LinkedIn Alerts</button>
-    <button class="tab" onclick="switchTab('ga',this)">🟡 Google Alerts</button>
+    <button class="tab active" onclick="sw('kw',this)">Keywords</button>
+    <button class="tab" onclick="sw('co',this)">Şirketler</button>
+    <button class="tab" onclick="sw('hr',this)">Hiring posts</button>
   </div>
-
-  <!-- KEYWORD PANEL -->
-  <div id="panel-kw" class="panel active">
-    <div class="top-row">
-      <input class="search-input" type="text" placeholder="Keyword yaz, Enter'a bas..." id="kw-s" oninput="renderKw()" onkeydown="if(event.key==='Enter')renderKw()">
-      <select class="sel" id="t-sel" onchange="renderKw()">
-        <option value="r86400">Son 24 saat</option>
-        <option value="r172800">Son 48 saat</option>
-        <option value="r259200">Son 72 saat</option>
-        <option value="r604800">Son 1 hafta</option>
-        <option value="">Tüm zamanlar</option>
-      </select>
-      <select class="sel" id="l-sel" onchange="renderKw()">
-        <option value="Istanbul, Turkey">İstanbul, Turkey</option>
-        <option value="Istanbul, Turkiye">İstanbul, Türkiye</option>
-        <option value="Turkey">Türkiye (geniş)</option>
-        <option value="Istanbul">İstanbul (yalın)</option>
-        <option value="">Konum yok</option>
-      </select>
-    </div>
-    <div class="cat-row" id="kw-cats">
-      <button class="f-btn active" onclick="setKwCat('all',this)">Tümü</button>
-      <button class="f-btn" onclick="setKwCat('bd',this)">BD & Partnerships</button>
-      <button class="f-btn" onclick="setKwCat('kam',this)">KAM / Commercial</button>
-      <button class="f-btn" onclick="setKwCat('ch',this)">Channel / Ecom</button>
-    </div>
-    <div id="kw-container"></div>
-  </div>
-
-  <!-- COMPANY PANEL -->
-  <div id="panel-co" class="panel">
-    <div class="top-row">
-      <input class="search-input" type="text" placeholder="Şirket ara..." id="co-s" oninput="renderCo()">
-      <select class="sel" id="co-sec" onchange="renderCo()">
-        <option value="">Tüm sektörler</option>
-        <option value="Tech / SaaS">Tech / SaaS</option>
-        <option value="Fintech">Fintech</option>
-        <option value="E-comm / Marketplace">E-comm / Marketplace</option>
-        <option value="Retail">Retail</option>
-        <option value="FMCG">FMCG</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>
-    <div id="co-container"></div>
-  </div>
-
-  <!-- LINKEDIN ALERTS PANEL -->
-  <div id="panel-li" class="panel">
-    <div class="info-box">
-      <strong>Nasıl kurarsın:</strong> "Alert Kur" butonuna tıkla → LinkedIn arama sayfası açılır → sağ üstte <strong>"Create job alert"</strong> butonuna bas → <strong>Daily</strong> seç → kaydet. Bir kez kurulunca her sabah mail gelir.<br><br>
-      <strong>İpucu:</strong> Hepsini aynı anda açmak için "Tümünü Aç" butonunu kullan. Her tıkta bir tab açılır.
-    </div>
-    <button class="open-all-btn" id="li-all-btn" onclick="openAllLI()">⚡ Tümünü sırayla aç</button>
-    <div id="li-list"></div>
-  </div>
-
-  <!-- GOOGLE ALERTS PANEL -->
-  <div id="panel-ga" class="panel">
-    <div class="info-box">
-      <strong>Google Alerts ne yapar:</strong> LinkedIn'de hiç yayınlanmayan ilanları yakalar. Şirket kariyer sayfaları, Lever, Greenhouse ilanları LinkedIn'den önce Google'a indexlenir.<br><br>
-      <strong>Nasıl kurarsın:</strong> "Alert Kur" butonuna bas → google.com/alerts açılır, sorgu dolu gelir → <strong>Show options</strong> aç → Frequency: <strong>As-it-happens</strong> → <strong>Create Alert</strong>.
-    </div>
-    <button class="open-all-btn" id="ga-all-btn" onclick="openAllGA()">⚡ Tümünü sırayla aç</button>
-    <div id="ga-list"></div>
+  <div class="ctrl">
+    <input type="text" placeholder="filtrele..." id="s" oninput="render()" onkeydown="if(event.key==='Enter')render()">
+    <select id="t" onchange="render()">
+      <option value="qdr:d">Son 24 saat</option>
+      <option value="qdr:d2">Son 48 saat</option>
+      <option value="qdr:w">Son 1 hafta</option>
+      <option value="qdr:m">Son 1 ay</option>
+      <option value="">Tüm zamanlar</option>
+    </select>
   </div>
 </div>
-
+<div id="panel-kw" class="panel active">
+  <div class="legend">🔵 LinkedIn jobs &nbsp;·&nbsp; 🟢 Google (LinkedIn dışı kariyer sayfaları + ATS)</div>
+  <div id="kw-out"></div>
+</div>
+<div id="panel-co" class="panel"><div id="co-out"></div></div>
+<div id="panel-hr" class="panel"><div id="hr-out"></div></div>
+</div>
 <script>
-const KWS = [
-  // BD & Partnerships
-  {t:'Business Development Manager', c:'bd'},
-  {t:'Business Development Executive', c:'bd'},
-  {t:'Business Development and Partnerships Manager', c:'bd'},
-  {t:'Partner Business Development Manager', c:'bd'},
-  {t:'Strategy and Business Development Manager', c:'bd'},
-  {t:'Business Development Solutions Manager', c:'bd'},
-  {t:'Partnerships Manager', c:'bd'},
-  {t:'Strategic Partnerships Manager', c:'bd'},
-  {t:'Partner Manager', c:'bd'},
-  {t:'Channel Partnerships Manager', c:'bd'},
-  {t:'Platform Partnerships Manager', c:'bd'},
-  {t:'Merchant Partnerships Manager', c:'bd'},
-  {t:'Brand Partnership Manager', c:'bd'},
-  {t:'Commercial Partnership Manager', c:'bd'},
-  {t:'Growth Partnerships Manager', c:'bd'},
-  {t:'Ecosystem Development Manager', c:'bd'},
-  {t:'Alliance Manager', c:'bd'},
-  {t:'Go-to-Market Manager', c:'bd'},
-  {t:'Market Development Manager', c:'bd'},
-  {t:'Market Entry Manager', c:'bd'},
-  {t:'Partner Development Manager', c:'bd'},
-  {t:'Commercial Development Manager', c:'bd'},
-  {t:'Regional Partnership Manager', c:'bd'},
-  {t:'EMEA Partnerships Manager', c:'bd'},
-  {t:'Large Customer Sales', c:'bd'},
-  {t:'Industry Manager', c:'bd'},
-  {t:'Enterprise Account Executive', c:'bd'},
-  {t:'Client Partnerships Manager', c:'bd'},
-  // KAM / Commercial
-  {t:'Key Account Manager', c:'kam'},
-  {t:'Senior Key Account Manager', c:'kam'},
-  {t:'Global Account Manager', c:'kam'},
-  {t:'Account Manager Enterprise', c:'kam'},
-  {t:'Commercial Manager', c:'kam'},
-  {t:'B2B Commercial Manager', c:'kam'},
-  {t:'Trade Marketing Manager', c:'kam'},
-  {t:'Revenue Growth Manager', c:'kam'},
-  {t:'Portfolio Manager Commercial', c:'kam'},
-  {t:'Joint Business Planning Manager', c:'kam'},
-  // Channel / Ecom / Vendor
-  {t:'Category Manager', c:'ch'},
-  {t:'E-commerce Manager', c:'ch'},
-  {t:'Channel Manager', c:'ch'},
-  {t:'Vendor Manager', c:'ch'},
-  {t:'Marketplace Manager', c:'ch'},
-  {t:'Marketplace Development Manager', c:'ch'},
-  {t:'Merchant Success Manager', c:'ch'},
-  {t:'Seller Success Manager', c:'ch'},
-  {t:'Retail Partnership Manager', c:'ch'},
-  {t:'Fashion Partnership Manager', c:'ch'},
-  {t:'Program Manager Commercial', c:'ch'},
+const KWS=[
+  {t:'Business Development Manager',c:'bd'},
+  {t:'Business Development and Partnerships Manager',c:'bd'},
+  {t:'Partnerships Manager',c:'bd'},
+  {t:'Strategic Partnerships Manager',c:'bd'},
+  {t:'Partner Manager',c:'bd'},
+  {t:'Partner Business Development Manager',c:'bd'},
+  {t:'Brand Partnership Manager',c:'bd'},
+  {t:'Commercial Partnership Manager',c:'bd'},
+  {t:'Ecosystem Development Manager',c:'bd'},
+  {t:'Alliance Manager',c:'bd'},
+  {t:'Go-to-Market Manager',c:'bd'},
+  {t:'Market Development Manager',c:'bd'},
+  {t:'Market Entry Manager',c:'bd'},
+  {t:'Large Customer Sales',c:'bd'},
+  {t:'Industry Manager',c:'bd'},
+  {t:'Enterprise Account Executive',c:'bd'},
+  {t:'Key Account Manager',c:'kam'},
+  {t:'Senior Key Account Manager',c:'kam'},
+  {t:'Commercial Manager',c:'kam'},
+  {t:'Global Account Manager',c:'kam'},
+  {t:'Account Manager Enterprise',c:'kam'},
+  {t:'Trade Marketing Manager',c:'kam'},
+  {t:'Revenue Growth Manager',c:'kam'},
+  {t:'Category Manager',c:'ch'},
+  {t:'E-commerce Manager',c:'ch'},
+  {t:'Channel Manager',c:'ch'},
+  {t:'Vendor Manager',c:'ch'},
+  {t:'Marketplace Manager',c:'ch'},
+  {t:'Merchant Success Manager',c:'ch'},
 ];
-
-const SEC_LABELS = {bd:'BD & Partnerships', kam:'KAM / Commercial', ch:'Channel / Ecom / Vendor'};
-let kwCat = 'all';
-let liIdx = 0, gaIdx = 0;
-
-function getTime(){ return document.getElementById('t-sel').value; }
-function getLoc(){ return document.getElementById('l-sel').value; }
-
-function liUrl(kw, loc, t){
-  return 'https://www.linkedin.com/jobs/search/?keywords='+encodeURIComponent(kw)+'&location='+encodeURIComponent(loc||'Istanbul, Turkey')+(t?'&f_TPR='+t:'');
+const SECS={bd:'BD & Partnerships',kam:'KAM / Commercial',ch:'Channel / Ecom / Vendor'};
+const T=()=>document.getElementById('t').value;
+function liUrl(kw,t){
+  let tf=t==='qdr:d'?'r86400':t==='qdr:d2'?'r172800':t==='qdr:w'?'r604800':t==='qdr:m'?'r2592000':'';
+  return 'https://www.linkedin.com/jobs/search/?keywords='+encodeURIComponent(kw)+'&location=Istanbul%2C%20Turkey'+(tf?'&f_TPR='+tf:'');
 }
-function gjUrl(kw, loc, t){
-  let q = encodeURIComponent('"'+kw+'" '+(loc||'Istanbul'));
-  let tf = t==='r86400'?'&tbs=qdr:d':t==='r172800'?'&tbs=qdr:d2':t==='r259200'?'&tbs=qdr:d3':t==='r604800'?'&tbs=qdr:w':'';
-  return 'https://www.google.com/search?q='+q+'+jobs'+tf+'&ibp=htl;jobs';
+function gUrl(kw,t){
+  let q='"'+kw+'" AND ("Istanbul" OR "Turkey") AND ("careers" OR "jobs" OR "hiring")';
+  return 'https://www.google.com/search?q='+encodeURIComponent(q)+(t?'&tbs='+t:'');
 }
-function knUrl(kw, loc){
-  let city = (!loc || loc.toLowerCase().includes('istanbul')) ? '&loc=istanbul' : '';
-  return 'https://www.kariyer.net/is-ilanlari?q='+encodeURIComponent(kw)+city;
+function kwCard(k){
+  let t=T();
+  return '<div class="card"><div class="kw">'+k.t+'</div><div class="btns"><a class="btn li" href="'+liUrl(k.t,t)+'" target="_blank">LinkedIn</a><a class="btn goo" href="'+gUrl(k.t,t)+'" target="_blank">Google</a></div></div>';
 }
-function hcUrl(kw, loc){
-  return 'https://hiring.cafe/?q='+encodeURIComponent(kw)+'&l='+encodeURIComponent(loc||'Istanbul, Turkey');
-}
-function wdUrl(kw){
-  return 'https://www.myworkdayjobs.com/en-US/search?q='+encodeURIComponent(kw)+'&locationCountry=792';
-}
-function srUrl(kw, loc){
-  return 'https://jobs.smartrecruiters.com/?keyword='+encodeURIComponent(kw)+'&location='+encodeURIComponent(loc||'Istanbul, Turkey');
-}
-function wbUrl(kw, loc){
-  return 'https://jobs.workable.com/?query='+encodeURIComponent(kw)+'&location='+encodeURIComponent(loc||'Istanbul');
-}
-function lvUrl(kw, loc){
-  return 'https://www.google.com/search?q=site:jobs.lever.co+'+encodeURIComponent('"'+kw+'"')+'+'+encodeURIComponent(loc||'Istanbul');
-}
-function icUrl(kw){
-  return 'https://careers.icims.com/jobs/search?ss=1&searchKeyword='+encodeURIComponent(kw)+'&searchLocation=Istanbul%2C+Turkey';
-}
-
-function kwCard(kw){
-  let loc = getLoc(), t = getTime();
-  return '<div class="kw-card">'
-    + '<div class="kw-title">'+kw.t+'</div>'
-    + '<div class="p-row">'
-    + '<a class="p-btn" href="'+liUrl(kw.t,loc,t)+'" target="_blank"><span class="dot d-li"></span>LinkedIn</a>'
-    + '<a class="p-btn" href="'+gjUrl(kw.t,loc,t)+'" target="_blank"><span class="dot d-gj"></span>Google Jobs</a>'
-    + '<a class="p-btn" href="'+knUrl(kw.t,loc)+'" target="_blank"><span class="dot d-kn"></span>Kariyer.net</a>'
-    + '<a class="p-btn" href="'+hcUrl(kw.t,loc)+'" target="_blank"><span class="dot d-hc"></span>HiringCafe</a>'
-    + '<a class="p-btn" href="'+wdUrl(kw.t)+'" target="_blank"><span class="dot d-wd"></span>Workday TR</a>'
-    + '<a class="p-btn" href="'+srUrl(kw.t,loc)+'" target="_blank"><span class="dot d-sr"></span>SmartRec</a>'
-    + '<a class="p-btn" href="'+wbUrl(kw.t,loc)+'" target="_blank"><span class="dot d-wb"></span>Workable</a>'
-    + '<a class="p-btn" href="'+lvUrl(kw.t,loc)+'" target="_blank"><span class="dot d-lv"></span>Lever</a>'
-    + '<a class="p-btn" href="'+icUrl(kw.t)+'" target="_blank"><span class="dot d-ic"></span>iCIMS</a>'
-    + '</div></div>';
-}
-
-function renderKw(){
-  let s = (document.getElementById('kw-s').value||'').toLowerCase().trim();
-  let secs = kwCat==='all' ? ['bd','kam','ch'] : [kwCat];
-  let html = '', total = 0;
-  secs.forEach(sec => {
-    let items = KWS.filter(k => k.c===sec && (!s||k.t.toLowerCase().includes(s)));
-    if(!items.length) return;
-    total += items.length;
-    if(kwCat==='all') html += '<div class="sec-label">'+SEC_LABELS[sec]+'</div>';
-    html += '<div class="kw-grid">'+items.map(kwCard).join('')+'</div>';
+function render(){
+  let s=(document.getElementById('s').value||'').toLowerCase().trim();
+  let h='';
+  ['bd','kam','ch'].forEach(sec=>{
+    let items=KWS.filter(k=>k.c===sec&&(!s||k.t.toLowerCase().includes(s)));
+    if(!items.length)return;
+    h+='<div class="sec">'+SECS[sec]+'</div><div class="grid">'+items.map(kwCard).join('')+'</div>';
   });
-  document.getElementById('kw-container').innerHTML = html || '<p class="no-result">Sonuç bulunamadı</p>';
-  document.getElementById('total-count').textContent = total + ' keyword';
+  document.getElementById('kw-out').innerHTML=h||'<p class="empty">sonuç yok</p>';
 }
-
-function setKwCat(c, el){
-  kwCat = c;
-  document.querySelectorAll('#kw-cats .f-btn').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  renderKw();
-}
-
-const COS = [
-  {n:'Google TR', s:'Tech / SaaS', u:'https://careers.google.com/jobs/results/?location=Istanbul%2C+Turkey', li:'https://www.linkedin.com/company/google/jobs/'},
-  {n:'Microsoft TR', s:'Tech / SaaS', u:'https://jobs.careers.microsoft.com/global/en/search?lc=Istanbul%2CTurkey', li:'https://www.linkedin.com/company/microsoft/jobs/'},
-  {n:'Meta TR', s:'Tech / SaaS', u:'https://www.metacareers.com/jobs/?offices[0]=Istanbul', li:'https://www.linkedin.com/company/meta/jobs/'},
-  {n:'Amazon TR', s:'Tech / SaaS', u:'https://www.amazon.jobs/en/search?country%5B%5D=TUR&city%5B%5D=Istanbul', li:'https://www.linkedin.com/company/amazon/jobs/'},
-  {n:'SAP TR', s:'Tech / SaaS', u:'https://jobs.sap.com/search/?searchby=location&q=Istanbul', li:'https://www.linkedin.com/company/sap/jobs/'},
-  {n:'Salesforce TR', s:'Tech / SaaS', u:'https://salesforce.wd12.myworkdayjobs.com/External_Career_Site?locationCountry=TUR', li:'https://www.linkedin.com/company/salesforce/jobs/'},
-  {n:'Oracle TR', s:'Tech / SaaS', u:'https://eeho.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/jobsearch/requisitions?location=Turkey', li:'https://www.linkedin.com/company/oracle/jobs/'},
-  {n:'IBM TR', s:'Tech / SaaS', u:'https://www.ibm.com/careers/search?field_keyword_08[0]=Turkey', li:'https://www.linkedin.com/company/ibm/jobs/'},
-  {n:'Amadeus', s:'Tech / SaaS', u:'https://careers.amadeus.com/search#/?country=Turkey', li:'https://www.linkedin.com/company/amadeus/jobs/'},
-  {n:'Insider', s:'Tech / SaaS', u:'https://useinsider.com/careers/', li:'https://www.linkedin.com/company/useinsider/jobs/'},
-  {n:'Booking.com', s:'Tech / SaaS', u:'https://jobs.booking.com/careers?query=&location=Istanbul', li:'https://www.linkedin.com/company/booking.com/jobs/'},
-  {n:'Turkcell Digital', s:'Tech / SaaS', u:'https://www.turkcell.com.tr/hakkimizda/kurumsal-bilgiler/insan-kaynaklari/is-ilanlari', li:'https://www.linkedin.com/company/turkcell/jobs/'},
-  {n:'Udemy TR', s:'Tech / SaaS', u:'https://about.udemy.com/careers/?location=Istanbul', li:'https://www.linkedin.com/company/udemy/jobs/'},
-  {n:'Mastercard TR', s:'Fintech', u:'https://careers.mastercard.com/us/en/istanbul-turkiye', li:'https://www.linkedin.com/company/mastercard/jobs/'},
-  {n:'Visa TR', s:'Fintech', u:'https://corporate.visa.com/en/jobs/careers/search-results#country=TUR', li:'https://www.linkedin.com/company/visa/jobs/'},
-  {n:'iyzico', s:'Fintech', u:'https://www.iyzico.com/en/about-us/career', li:'https://www.linkedin.com/company/iyzi-payments/jobs/'},
-  {n:'PayCore', s:'Fintech', u:'https://paycore.com/careers/', li:'https://www.linkedin.com/company/paycoregroup/jobs/'},
-  {n:'Papara', s:'Fintech', u:'https://papara.com/kariyer', li:'https://www.linkedin.com/company/papara/jobs/'},
-  {n:'Param', s:'Fintech', u:'https://param.com.tr/kariyer', li:'https://www.linkedin.com/company/param-elektronik-para/jobs/'},
-  {n:'Hepsiburada', s:'E-comm / Marketplace', u:'https://www.hepsiburada.com/kariyer', li:'https://www.linkedin.com/company/hepsiburada/jobs/'},
-  {n:'n11', s:'E-comm / Marketplace', u:'https://www.linkedin.com/company/n11com/jobs/', li:'https://www.linkedin.com/company/n11com/jobs/'},
-  {n:'Pazarama', s:'E-comm / Marketplace', u:'https://www.linkedin.com/company/pazarama/jobs/', li:'https://www.linkedin.com/company/pazarama/jobs/'},
-  {n:'Getir', s:'E-comm / Marketplace', u:'https://getir.com/careers/', li:'https://www.linkedin.com/company/getir/jobs/'},
-  {n:'Sahibinden', s:'E-comm / Marketplace', u:'https://www.sahibinden.com/kariyer', li:'https://www.linkedin.com/company/sahibinden-com/jobs/'},
-  {n:'H&M', s:'Retail', u:'https://career.hm.com/content/hmcareer/en_gb/workingathm/search-jobs.html?country=TR', li:'https://www.linkedin.com/company/h-m/jobs/'},
-  {n:'IKEA TR', s:'Retail', u:'https://www.linkedin.com/jobs/search/?f_C=2743&geoId=102105699', li:'https://www.linkedin.com/jobs/search/?f_C=2743&geoId=102105699'},
-  {n:'Marks & Spencer', s:'Retail', u:'https://jobs.marksandspencer.com/search-jobs/Turkey', li:'https://www.linkedin.com/company/marks-spencer/jobs/'},
-  {n:'Migros', s:'Retail', u:'https://www.linkedin.com/company/migros-ticaret/jobs/', li:'https://www.linkedin.com/company/migros-ticaret/jobs/'},
-  {n:'Mavi', s:'Retail', u:'https://career5.successfactors.eu/portalcareer?company=Mavi', li:'https://www.linkedin.com/company/mavi-jeans/jobs/'},
-  {n:'Decathlon TR', s:'Retail', u:'https://kesfet.decathlon.com.tr/ilanlar/', li:'https://www.linkedin.com/company/decathlon/jobs/'},
-  {n:'Adidas TR', s:'Retail', u:'https://careers.adidas-group.com/jobs?query=&country=TR', li:'https://www.linkedin.com/company/adidas/jobs/'},
-  {n:'PVH', s:'Retail', u:'https://careers.pvh.com/global/en/search-results?location=Turkey', li:'https://www.linkedin.com/company/pvh-corp/jobs/'},
-  {n:'Alshaya TR', s:'Retail', u:'https://www.linkedin.com/company/alshayagroupavrasya/jobs/', li:'https://www.linkedin.com/company/alshayagroupavrasya/jobs/'},
-  {n:'Lego', s:'Retail', u:'https://www.lego.com/en-us/careers/search#/?country=TR', li:'https://www.linkedin.com/company/lego-group/jobs/'},
-  {n:'Nestle TR', s:'FMCG', u:'https://www.nestle.com/jobs/search-jobs#country=Turkey', li:'https://www.linkedin.com/company/nestle/jobs/'},
-  {n:'P&G TR', s:'FMCG', u:'https://www.pgcareers.com/global/en/search-results?location=Turkey', li:'https://www.linkedin.com/company/pg/jobs/'},
-  {n:'Henkel TR', s:'FMCG', u:'https://jobs.henkel.com/search-results?location=Turkey', li:'https://www.linkedin.com/company/henkel/jobs/'},
-  {n:'Loreal TR', s:'FMCG', u:'https://careers.loreal.com/en_US/jobs/SearchJobs/Turkey', li:'https://www.linkedin.com/company/loreal/jobs/'},
-  {n:'Coca-Cola TR', s:'FMCG', u:'https://careers.coca-colacompany.com/job-search-results/?location=Turkey', li:'https://www.linkedin.com/company/the-coca-cola-company/jobs/'},
-  {n:'Pepsi TR', s:'FMCG', u:'https://www.pepsicojobs.com/main/jobs?location=Turkey', li:'https://www.linkedin.com/company/pepsico/jobs/'},
-  {n:'Ferrero TR', s:'FMCG', u:'https://careers.ferrero.com/search/?q=&locationsearch=Turkey', li:'https://www.linkedin.com/company/ferrero/jobs/'},
-  {n:'Mondelez TR', s:'FMCG', u:'https://careers.mondelezinternational.com/job-search-results/?country=Turkey', li:'https://www.linkedin.com/company/mondelez-international/jobs/'},
-  {n:'Reckitt TR', s:'FMCG', u:'https://careers.reckitt.com/global/en/search-results?location=Turkey', li:'https://www.linkedin.com/company/reckitt/jobs/'},
-  {n:'Diageo TR', s:'FMCG', u:'https://diageo.wd3.myworkdayjobs.com/Diageo_Careers?locationCountry=TR', li:'https://www.linkedin.com/company/diageo/jobs/'},
-  {n:'Anadolu Efes', s:'FMCG', u:'https://careers.smartrecruiters.com/AnadoluEfes', li:'https://www.linkedin.com/company/anadoluefes/jobs/'},
-  {n:'Watsons TR', s:'FMCG', u:'https://kariyer.watsons.com.tr', li:'https://www.linkedin.com/company/watsons-turkey/jobs/'},
-  {n:'Gratis', s:'FMCG', u:'https://kariyer.gratis.com', li:'https://www.linkedin.com/company/gratis-turkey/jobs/'},
-  {n:'Rossmann TR', s:'FMCG', u:'https://kariyer.rossmann.com.tr', li:'https://www.linkedin.com/company/rossmann-turkey/jobs/'},
-  {n:'BSH TR', s:'Other', u:'https://www.linkedin.com/company/bsh-ev-aletleri-turkiye/jobs/', li:'https://www.linkedin.com/company/bsh-ev-aletleri-turkiye/jobs/'},
-  {n:'Siemens TR', s:'Other', u:'https://jobs.siemens.com/jobs?search=&location=Istanbul%2C+Turkey', li:'https://www.linkedin.com/company/siemens/jobs/'},
-  {n:'Shell TR', s:'Other', u:'https://www.shell.com/careers/explore-jobs.html?search=&country=Turkey', li:'https://www.linkedin.com/company/shell/jobs/'},
-  {n:'BAT TR', s:'Other', u:'https://careers.bat.com/search/?q=&locationsearch=Turkey', li:'https://www.linkedin.com/company/british-american-tobacco/jobs/'},
+const COS=[
+  {n:'Google TR',s:'Tech',u:'https://careers.google.com/jobs/results/?location=Istanbul%2C+Turkey'},
+  {n:'Microsoft TR',s:'Tech',u:'https://jobs.careers.microsoft.com/global/en/search?lc=Istanbul%2CTurkey'},
+  {n:'Meta TR',s:'Tech',u:'https://www.metacareers.com/jobs/?offices[0]=Istanbul'},
+  {n:'Amazon TR',s:'Tech',u:'https://www.amazon.jobs/en/search?country%5B%5D=TUR&city%5B%5D=Istanbul'},
+  {n:'SAP TR',s:'Tech',u:'https://jobs.sap.com/search/?searchby=location&q=Istanbul'},
+  {n:'Salesforce TR',s:'Tech',u:'https://salesforce.wd12.myworkdayjobs.com/External_Career_Site?locationCountry=TUR'},
+  {n:'Oracle TR',s:'Tech',u:'https://eeho.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/jobsearch/requisitions?location=Turkey'},
+  {n:'IBM TR',s:'Tech',u:'https://www.ibm.com/careers/search?field_keyword_08[0]=Turkey'},
+  {n:'Amadeus',s:'Tech',u:'https://careers.amadeus.com/search#/?country=Turkey'},
+  {n:'Insider',s:'Tech',u:'https://useinsider.com/careers/'},
+  {n:'Booking.com',s:'Tech',u:'https://jobs.booking.com/careers?query=&location=Istanbul'},
+  {n:'Mastercard TR',s:'Fintech',u:'https://careers.mastercard.com/us/en/istanbul-turkiye'},
+  {n:'Visa TR',s:'Fintech',u:'https://corporate.visa.com/en/jobs/careers/search-results#country=TUR'},
+  {n:'iyzico',s:'Fintech',u:'https://www.iyzico.com/en/about-us/career'},
+  {n:'Papara',s:'Fintech',u:'https://papara.com/kariyer'},
+  {n:'PayCore',s:'Fintech',u:'https://paycore.com/careers/'},
+  {n:'Hepsiburada',s:'E-comm',u:'https://www.hepsiburada.com/kariyer'},
+  {n:'Getir',s:'E-comm',u:'https://getir.com/careers/'},
+  {n:'Sahibinden',s:'E-comm',u:'https://www.sahibinden.com/kariyer'},
+  {n:'H&M',s:'Retail',u:'https://career.hm.com/content/hmcareer/en_gb/workingathm/search-jobs.html?country=TR'},
+  {n:'Mavi',s:'Retail',u:'https://career5.successfactors.eu/portalcareer?company=Mavi'},
+  {n:'Decathlon TR',s:'Retail',u:'https://kesfet.decathlon.com.tr/ilanlar/'},
+  {n:'Adidas TR',s:'Retail',u:'https://careers.adidas-group.com/jobs?query=&country=TR'},
+  {n:'Nestle TR',s:'FMCG',u:'https://www.nestle.com/jobs/search-jobs#country=Turkey'},
+  {n:'P&G TR',s:'FMCG',u:'https://www.pgcareers.com/global/en/search-results?location=Turkey'},
+  {n:'Loreal TR',s:'FMCG',u:'https://careers.loreal.com/en_US/jobs/SearchJobs/Turkey'},
+  {n:'Coca-Cola TR',s:'FMCG',u:'https://careers.coca-colacompany.com/job-search-results/?location=Turkey'},
+  {n:'Diageo TR',s:'FMCG',u:'https://diageo.wd3.myworkdayjobs.com/Diageo_Careers?locationCountry=TR'},
+  {n:'Anadolu Efes',s:'FMCG',u:'https://careers.smartrecruiters.com/AnadoluEfes'},
+  {n:'Siemens TR',s:'Other',u:'https://jobs.siemens.com/jobs?search=&location=Istanbul%2C+Turkey'},
+  {n:'Shell TR',s:'Other',u:'https://www.shell.com/careers/explore-jobs.html?search=&country=Turkey'},
+  {n:'BAT TR',s:'Other',u:'https://careers.bat.com/search/?q=&locationsearch=Turkey'},
 ];
-
-function coCard(co){
-  let hasDiff = co.u && co.u !== co.li;
-  let links = hasDiff
-    ? '<a class="badge" href="'+co.u+'" target="_blank"><span class="dot d-gj"></span>Kariyer</a><a class="badge" href="'+co.li+'" target="_blank"><span class="dot d-li"></span>LinkedIn</a>'
-    : '<a class="badge" href="'+co.li+'" target="_blank"><span class="dot d-li"></span>LinkedIn</a>';
-  return '<div class="co-card"><div class="co-name">'+co.n+'</div><span class="co-sec">'+co.s+'</span><div class="badge-row">'+links+'</div></div>';
-}
-
 function renderCo(){
-  let s = (document.getElementById('co-s').value||'').toLowerCase();
-  let sec = document.getElementById('co-sec').value;
-  let items = COS.filter(c => (!s||c.n.toLowerCase().includes(s)) && (!sec||c.s===sec));
-  let html = '';
-  if(!sec){
-    let secs = [...new Set(COS.map(c=>c.s))];
-    secs.forEach(sv => {
-      let g = items.filter(c=>c.s===sv); if(!g.length) return;
-      html += '<div class="sec-label">'+sv+'</div><div class="co-grid">'+g.map(coCard).join('')+'</div>';
-    });
-  } else {
-    html = '<div class="co-grid">'+items.map(coCard).join('')+'</div>';
-  }
-  document.getElementById('co-container').innerHTML = html || '<p class="no-result">Sonuç bulunamadı</p>';
-}
-
-// ALERT LISTS
-const ALERT_KWS = KWS.map(k=>k.t);
-
-function renderLI(){
-  let html = '';
-  ['bd','kam','ch'].forEach(cat => {
-    let items = KWS.filter(k=>k.c===cat);
-    html += '<div class="sec-label">'+SEC_LABELS[cat]+'</div>';
-    items.forEach(kw => {
-      html += '<div class="alert-row">'
-        + '<div><div class="alert-kw">'+kw.t+'</div><div class="alert-sub">📍 Istanbul, Turkey · Daily</div></div>'
-        + '<div class="alert-btns"><a class="badge" href="'+liUrl(kw.t,'Istanbul, Turkey','r86400')+'" target="_blank"><span class="dot d-li"></span>Alert Kur</a></div>'
-        + '</div>';
-    });
+  let s=(document.getElementById('s').value||'').toLowerCase();
+  let h='';
+  ['Tech','Fintech','E-comm','Retail','FMCG','Other'].forEach(sec=>{
+    let g=COS.filter(c=>c.s===sec&&(!s||c.n.toLowerCase().includes(s)));
+    if(!g.length)return;
+    h+='<div class="sec">'+sec+'</div><div class="co-grid">'+g.map(c=>'<div class="co"><div class="co-n">'+c.n+'</div><div class="co-s">'+c.s+'</div><div class="btns"><a class="btn goo" href="'+c.u+'" target="_blank">Kariyer</a></div></div>').join('')+'</div>';
   });
-  document.getElementById('li-list').innerHTML = html;
+  document.getElementById('co-out').innerHTML=h||'<p class="empty">sonuç yok</p>';
 }
-
-function renderGA(){
-  let html = '';
-  ['bd','kam','ch'].forEach(cat => {
-    let items = KWS.filter(k=>k.c===cat);
-    html += '<div class="sec-label">'+SEC_LABELS[cat]+'</div>';
-    items.forEach(kw => {
-      let q1 = '"'+kw.t+'" "Istanbul"';
-      let q2 = '"'+kw.t+'" "Turkey"';
-      html += '<div class="alert-row">'
-        + '<div><div class="alert-kw">'+kw.t+'</div><div class="alert-sub">'+q1+'</div></div>'
-        + '<div class="alert-btns">'
-        + '<a class="badge" href="https://www.google.com/alerts?q='+encodeURIComponent(q1)+'" target="_blank"><span class="dot d-gj"></span>Istanbul</a>'
-        + '<a class="badge" href="https://www.google.com/alerts?q='+encodeURIComponent(q2)+'" target="_blank"><span class="dot d-gj"></span>Turkey</a>'
-        + '</div></div>';
-    });
+const HIRING=['işe alıyoruz','ekibimize katıl','açık pozisyon Istanbul','arıyoruz Istanbul','arayışımız var Istanbul',"we're hiring business development Istanbul",'hiring partnerships manager Istanbul','hiring key account manager Istanbul','now hiring commercial Turkey','#hiring Istanbul'];
+function renderHiring(){
+  let h='<div class="sec">LinkedIn post araması</div>';
+  HIRING.forEach(kw=>{
+    let d='https://www.linkedin.com/search/results/content/?keywords='+encodeURIComponent(kw)+'&datePosted=%5B%22past-24h%22%5D&origin=FACETED_SEARCH';
+    let w='https://www.linkedin.com/search/results/content/?keywords='+encodeURIComponent(kw)+'&datePosted=%5B%22past-week%22%5D&origin=FACETED_SEARCH';
+    h+='<div class="hr"><span class="hr-kw">'+kw+'</span><div class="btns"><a class="btn li" href="'+d+'" target="_blank">24s</a><a class="btn li" href="'+w+'" target="_blank">1 hafta</a></div></div>';
   });
-  document.getElementById('ga-list').innerHTML = html;
+  document.getElementById('hr-out').innerHTML=h;
 }
-
-function openAllLI(){
-  if(liIdx >= KWS.length){ document.getElementById('li-all-btn').textContent='✅ Tümü açıldı!'; return; }
-  let kw = KWS[liIdx];
-  window.open(liUrl(kw.t,'Istanbul, Turkey','r86400'), '_blank');
-  liIdx++;
-  document.getElementById('li-all-btn').textContent = '⚡ '+liIdx+'/'+KWS.length+' açıldı — Devam et';
-}
-
-function openAllGA(){
-  if(gaIdx >= KWS.length){ document.getElementById('ga-all-btn').textContent='✅ Tümü açıldı!'; return; }
-  let kw = KWS[gaIdx];
-  window.open('https://www.google.com/alerts?q='+encodeURIComponent('"'+kw.t+'" "Istanbul"'), '_blank');
-  gaIdx++;
-  document.getElementById('ga-all-btn').textContent = '⚡ '+gaIdx+'/'+KWS.length+' açıldı — Devam et';
-}
-
-function switchTab(id, el){
+function sw(id,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('panel-'+id).classList.add('active');
 }
-
-renderKw(); renderCo(); renderLI(); renderGA();
+render();renderCo();renderHiring();
 </script>
 </body>
 </html>
