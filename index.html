@@ -14,7 +14,6 @@
       --teal-bg: #e1f5ee; --teal-text: #0f6e56;
       --amber-bg: #faeeda; --amber-text: #633806;
       --coral-bg: #faece7; --coral-text: #712b13;
-      --purple-bg: #f0ecfb; --purple-text: #4a2c8a;
       --green: #0f6e56;
     }
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
@@ -36,10 +35,10 @@
     .card-name { font-size: 13px; font-weight: 500; color: var(--text); }
     .card-desc { font-size: 11px; color: var(--text3); line-height: 1.4; }
     .badge { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
-    .badge-li     { background: var(--blue-bg);   color: var(--blue-text); }
-    .badge-ats    { background: var(--teal-bg);   color: var(--teal-text); }
-    .badge-co     { background: var(--coral-bg);  color: var(--coral-text); }
-    .badge-am     { background: var(--amber-bg);  color: var(--amber-text); }
+    .badge-li  { background: var(--blue-bg);  color: var(--blue-text); }
+    .badge-ats { background: var(--teal-bg);  color: var(--teal-text); }
+    .badge-co  { background: var(--coral-bg); color: var(--coral-text); }
+    .badge-am  { background: var(--amber-bg); color: var(--amber-text); }
     .divider { height: 1px; background: var(--border); margin: 2rem 0; }
     .query-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; }
     .query-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
@@ -74,10 +73,9 @@
   </div>
 
   <div class="info-box">
-    LinkedIn: <strong>geoId=102424322</strong> (İstanbul) · on-site+hybrid (<strong>f_WT=1,3</strong>) · remote hariç · yeniden eskiye (<strong>sortBy=DD</strong>). ATS sorguları Google <code>after:</code> ile tarih filtreli.
+    LinkedIn: <strong>geoId=102424322</strong> (İstanbul) · on-site+hybrid · remote hariç · yeniden eskiye. Zaman seçimi: 24sa önce başlar, tarihsiz en sonda.
   </div>
 
-  <!-- BD & Partnerships -->
   <div class="section">
     <div class="section-label">BD &amp; Partnerships</div>
     <div class="section-note">On-site + Hybrid · İstanbul · Mid-Senior · Remote hariç</div>
@@ -85,7 +83,6 @@
     <div class="grid" id="grid-bd"></div>
   </div>
 
-  <!-- KAM / Commercial -->
   <div class="section">
     <div class="section-label">KAM / Commercial / Category</div>
     <div class="section-note">On-site + Hybrid · İstanbul · Mid-Senior</div>
@@ -93,39 +90,34 @@
     <div class="grid" id="grid-kam"></div>
   </div>
 
-  <!-- Fintech & Payments -->
   <div class="section">
     <div class="section-label">Fintech &amp; Payments</div>
-    <div class="section-note">Yeni nesil · Finance background zorunluluğu olmayan · On-site+Hybrid</div>
+    <div class="section-note">Yeni nesil · Finance background zorunluluğu olmayan</div>
     <div class="time-tabs" id="tabs-fintech"></div>
     <div class="grid" id="grid-fintech"></div>
   </div>
 
-  <!-- SaaS / Tech -->
   <div class="section">
     <div class="section-label">SaaS / B2B Tech</div>
-    <div class="section-note">Platform satışı · Vendor partnerships · Marketplace seller growth odaklı</div>
+    <div class="section-note">Platform satışı · Vendor partnerships · B2B account management</div>
     <div class="time-tabs" id="tabs-saas"></div>
     <div class="grid" id="grid-saas"></div>
   </div>
 
-  <!-- AdTech / MarTech -->
   <div class="section">
-    <div class="section-label">AdTech / MarTech / RetailMedia</div>
-    <div class="section-note">Reklam platformları · Retail media · Seller/brand partnership odaklı</div>
+    <div class="section-label">AdTech / MarTech / Retail Media</div>
+    <div class="section-note">Reklam platformları · Seller/brand partnership odaklı</div>
     <div class="time-tabs" id="tabs-adtech"></div>
     <div class="grid" id="grid-adtech"></div>
   </div>
 
-  <!-- Travel / Logistics -->
   <div class="section">
-    <div class="section-label">Travel Tech / Logistics Tech / Delivery</div>
+    <div class="section-label">Travel Tech / Logistics / Delivery</div>
     <div class="section-note">Vendor/partner onboarding · KAM · Marketplace operasyonu</div>
     <div class="time-tabs" id="tabs-travel"></div>
     <div class="grid" id="grid-travel"></div>
   </div>
 
-  <!-- Company careers -->
   <div class="section">
     <div class="section-label">Şirket career sayfaları</div>
     <div class="grid grid-sm" id="grid-companies"></div>
@@ -133,17 +125,15 @@
 
   <div class="divider"></div>
 
-  <!-- ATS Queries -->
   <div class="section">
     <div class="section-label">ATS site: sorguları — Google</div>
-    <div class="section-note">7 platform: Greenhouse · Lever · Workable · Ashby · SmartRecruiters · Teamtailor · Recruitee</div>
+    <div class="section-note">7 platform · Lokasyon "istanbul" OR "turkey" OR "türkiye" olarak geçiyor</div>
     <div class="time-tabs" id="tabs-ats"></div>
     <div id="list-ats"></div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- inurl -->
   <div class="section">
     <div class="section-label">inurl: career page sorguları — Google</div>
     <div class="section-note">LinkedIn ve ATS'ten kaçan ilanları yakalar</div>
@@ -153,10 +143,9 @@
 
   <div class="divider"></div>
 
-  <!-- Builder -->
   <div class="section">
-    <div class="section-label">Custom query builder</div>
-    <p style="font-size:12px;color:var(--text2);margin-bottom:4px;">Keyword seç → zaman filtresi → Google'da aç veya kopyala.</p>
+    <div class="section-label">Custom query builder — Google ATS</div>
+    <p style="font-size:12px;color:var(--text2);margin-bottom:4px;">Keyword seç → zaman filtresi → Google'da aç veya kopyala. Phrase olarak eklenir, AND/OR yok.</p>
     <div class="kw-group-label">Role</div>
     <div class="kw-row" id="kw-role"></div>
     <div class="kw-group-label">Sektör</div>
@@ -180,119 +169,161 @@
 
 </div>
 <script>
-// ── CONSTANTS ──────────────────────────────────────────────────────
-var GEO_IST = "102424322"; // verified from linkedin.com search URLs
-var ONSITE_HYBRID = "f_WT=1%2C3"; // 1=onsite, 3=hybrid; remote(2) excluded
-var SORT_NEW = "sortBy=DD";
-var MID_SR   = "f_E=3%2C4";
-var FULLTIME = "f_JT=F";
+// ── VERIFIED PARAMS ────────────────────────────────────────────────
+// geoId 102424322 = Istanbul (verified)
+// geoId 102105699 = Turkey
+// f_PP = place filter, accepts comma-separated geoIds for OR logic
+// f_WT=1,3 = onsite + hybrid (no remote)
+// sortBy=DD = newest first
+// f_E=3,4 = Associate + Senior
+// f_JT=F = full-time only
+// LinkedIn keywords: plain phrases only, no AND/OR in URL (breaks search)
+// Boolean (AND/OR/NOT) works when typed manually in LinkedIn search bar, not via URL
 
-function liUrl(kw, tpr) {
-  var p = [
+var GEO_IST = "102424322";
+var GEO_TR  = "102105699";
+
+// TIME options — 24h first, tarihsiz last
+var TIME = [
+  { label:"Son 24 sa",   tpr:"r86400",   after:"after:"+ago(1)  },
+  { label:"Son 48 sa",   tpr:"r172800",  after:"after:"+ago(2)  },
+  { label:"Son 1 hafta", tpr:"r604800",  after:"after:"+ago(7)  },
+  { label:"Son 1 ay",    tpr:"r2592000", after:"after:"+ago(30) },
+  { label:"Tarihsiz",    tpr:"",         after:""               },
+];
+
+function ago(n) {
+  var d = new Date(); d.setDate(d.getDate()-n);
+  return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+}
+function pad(n) { return String(n).padStart(2,"0"); }
+
+// Build LinkedIn URL — keywords = plain phrase only, no AND/OR
+function liUrl(kw, locMode, tpr) {
+  var params = [
     "keywords=" + encodeURIComponent(kw),
-    "location=Istanbul%2C+Turkey",
-    "geoId=" + GEO_IST,
-    ONSITE_HYBRID, SORT_NEW, FULLTIME, MID_SR
+    "f_WT=1%2C3",   // onsite + hybrid
+    "sortBy=DD",
+    "f_JT=F",
+    "f_E=3%2C4"
   ];
-  if (tpr) p.push("f_TPR=" + tpr);
-  return "https://www.linkedin.com/jobs/search/?" + p.join("&");
+  if (locMode === "tr") {
+    params.push("location=Turkey");
+    params.push("geoId=" + GEO_TR);
+  } else {
+    // Default: Istanbul
+    params.push("location=Istanbul%2C+Turkey");
+    params.push("geoId=" + GEO_IST);
+  }
+  if (tpr) params.push("f_TPR=" + tpr);
+  return "https://www.linkedin.com/jobs/search/?" + params.join("&");
 }
 
-// ── TIME OPTIONS ───────────────────────────────────────────────────
-var TIME = [
-  { label:"Tarihsiz", tpr:"",        after:"" },
-  { label:"Son 24 sa", tpr:"r86400",  after:"after:"+ago(1) },
-  { label:"Son 48 sa", tpr:"r172800", after:"after:"+ago(2) },
-  { label:"Son 1 hafta",tpr:"r604800", after:"after:"+ago(7) },
-  { label:"Son 1 ay",  tpr:"r2592000",after:"after:"+ago(30) },
-];
-function ago(n){ var d=new Date(); d.setDate(d.getDate()-n); return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); }
-function pad(n){ return String(n).padStart(2,"0"); }
-
 // ── LINKEDIN CARD DATA ─────────────────────────────────────────────
+// Keywords: plain phrases only. No AND/OR — breaks LinkedIn URL search.
+// For broad OR searches, separate cards made per term.
+
 var BD = [
-  { name:"Business Development Manager",   kw:'"business development manager"',                    desc:"İstanbul · On-site+Hybrid" },
-  { name:"Partnerships Manager",           kw:'"partnerships manager"',                            desc:"İstanbul · On-site+Hybrid" },
-  { name:"Channel Manager",               kw:'"channel manager"',                                 desc:"İstanbul · On-site+Hybrid" },
-  { name:"Partner Manager",               kw:'"partner manager"',                                 desc:"İstanbul · On-site+Hybrid" },
-  { name:"BD — broad İstanbul",           kw:'"business development" OR "partnerships"',          desc:"İstanbul · geniş tarama" },
-  { name:"Vendor Manager",                kw:'"vendor manager" OR "supplier manager"',            desc:"İstanbul · marketplace odaklı" },
+  { name:"Business Development Manager",  kw:"business development manager",  desc:"İstanbul · On-site+Hybrid" },
+  { name:"Partnerships Manager",          kw:"partnerships manager",           desc:"İstanbul · On-site+Hybrid" },
+  { name:"Channel Manager",               kw:"channel manager",                desc:"İstanbul · On-site+Hybrid" },
+  { name:"Partner Manager",               kw:"partner manager",                desc:"İstanbul · On-site+Hybrid" },
+  { name:"Vendor Manager",                kw:"vendor manager",                 desc:"İstanbul · marketplace" },
+  { name:"BD — Türkiye geneli",           kw:"business development manager",   desc:"Türkiye · tüm şehirler", loc:"tr" },
 ];
 
 var KAM = [
-  { name:"Key Account Manager",           kw:'"key account manager"',                            desc:"İstanbul · On-site+Hybrid" },
-  { name:"Category Manager",              kw:'"category manager"',                               desc:"İstanbul · On-site+Hybrid" },
-  { name:"Commercial Manager",            kw:'"commercial manager"',                             desc:"İstanbul · On-site+Hybrid" },
-  { name:"E-commerce Manager",            kw:'"ecommerce manager" OR "e-commerce manager"',      desc:"İstanbul · On-site+Hybrid" },
-  { name:"Marketplace Manager",           kw:'"marketplace manager" OR "marketplace partnerships"', desc:"İstanbul · marketplace" },
-  { name:"Account Manager — B2B Tech",    kw:'"account manager" AND ("saas" OR "platform" OR "tech")', desc:"İstanbul · B2B tech" },
+  { name:"Key Account Manager",           kw:"key account manager",            desc:"İstanbul · On-site+Hybrid" },
+  { name:"Category Manager",              kw:"category manager",               desc:"İstanbul · On-site+Hybrid" },
+  { name:"Commercial Manager",            kw:"commercial manager",             desc:"İstanbul · On-site+Hybrid" },
+  { name:"E-commerce Manager",            kw:"ecommerce manager",              desc:"İstanbul · On-site+Hybrid" },
+  { name:"Marketplace Manager",           kw:"marketplace manager",            desc:"İstanbul · On-site+Hybrid" },
+  { name:"Account Manager",               kw:"account manager",                desc:"İstanbul · On-site+Hybrid" },
 ];
 
 var FINTECH = [
-  { name:"BD — Payments",                 kw:'"business development" AND ("payments" OR "fintech")',         desc:"İstanbul · On-site+Hybrid" },
-  { name:"Partnerships — Fintech",        kw:'"partnerships" AND ("fintech" OR "payments" OR "acquiring")',  desc:"İstanbul · On-site+Hybrid" },
-  { name:"Account Manager — Fintech",     kw:'"account manager" AND ("fintech" OR "payments")',             desc:"İstanbul · On-site+Hybrid" },
-  { name:"BD — Acquiring/Issuing",        kw:'"business development" AND ("acquiring" OR "merchant")',      desc:"İstanbul · kart ağı" },
+  { name:"BD Payments",                   kw:"business development payments",  desc:"İstanbul · On-site+Hybrid" },
+  { name:"Partnerships Fintech",          kw:"partnerships fintech",           desc:"İstanbul · On-site+Hybrid" },
+  { name:"Account Manager Fintech",       kw:"account manager fintech",        desc:"İstanbul · On-site+Hybrid" },
+  { name:"BD Acquiring",                  kw:"business development acquiring", desc:"İstanbul · kart ağı" },
+  { name:"Partner Manager Payments",      kw:"partner manager payments",       desc:"İstanbul · On-site+Hybrid" },
 ];
 
 var SAAS = [
-  { name:"BD — SaaS İstanbul",            kw:'"business development" AND "saas"',                          desc:"İstanbul · On-site+Hybrid" },
-  { name:"Partnerships — SaaS/Platform",  kw:'"partnerships" AND ("saas" OR "platform" OR "software")',    desc:"İstanbul · On-site+Hybrid" },
-  { name:"Account Executive — B2B SaaS",  kw:'"account executive" AND ("saas" OR "software" OR "b2b")',    desc:"İstanbul · B2B satış" },
-  { name:"Partner Manager — Tech",        kw:'"partner manager" AND ("tech" OR "software" OR "api")',      desc:"İstanbul · On-site+Hybrid" },
-  { name:"Seller/Vendor Success",         kw:'"seller success" OR "vendor success" OR "merchant success"', desc:"İstanbul · marketplace/platform" },
-  { name:"Ecosystem / Alliances Manager", kw:'"ecosystem manager" OR "alliances manager" OR "strategic alliances"', desc:"İstanbul · On-site+Hybrid" },
+  { name:"BD SaaS",                       kw:"business development saas",      desc:"İstanbul · On-site+Hybrid" },
+  { name:"Partnerships Platform",         kw:"partnerships platform",          desc:"İstanbul · On-site+Hybrid" },
+  { name:"Account Executive B2B",         kw:"account executive b2b",          desc:"İstanbul · B2B satış" },
+  { name:"Partner Manager Tech",          kw:"partner manager technology",     desc:"İstanbul · On-site+Hybrid" },
+  { name:"Seller Success Manager",        kw:"seller success manager",         desc:"İstanbul · marketplace" },
+  { name:"Strategic Alliances",           kw:"strategic alliances manager",    desc:"İstanbul · On-site+Hybrid" },
 ];
 
 var ADTECH = [
-  { name:"BD — AdTech/MarTech",           kw:'"business development" AND ("adtech" OR "martech" OR "advertising technology")', desc:"İstanbul · On-site+Hybrid" },
-  { name:"Partnerships — Retail Media",   kw:'"partnerships" AND ("retail media" OR "sponsored" OR "ads platform")',           desc:"İstanbul · retail media" },
-  { name:"Account Manager — AdTech",      kw:'"account manager" AND ("adtech" OR "digital advertising" OR "programmatic")',    desc:"İstanbul · On-site+Hybrid" },
-  { name:"BD — Digital Advertising",      kw:'"business development" AND ("digital advertising" OR "media" OR "ad network")', desc:"İstanbul · reklam ekosistemi" },
+  { name:"BD AdTech",                     kw:"business development adtech",    desc:"İstanbul · On-site+Hybrid" },
+  { name:"BD Digital Advertising",        kw:"business development digital advertising", desc:"İstanbul · On-site+Hybrid" },
+  { name:"Partnerships Retail Media",     kw:"partnerships retail media",      desc:"İstanbul · retail media" },
+  { name:"Account Manager AdTech",        kw:"account manager advertising",    desc:"İstanbul · On-site+Hybrid" },
 ];
 
 var TRAVEL = [
-  { name:"BD — Travel Tech",              kw:'"business development" AND ("travel tech" OR "travel" OR "tourism")',            desc:"İstanbul · On-site+Hybrid" },
-  { name:"Partnerships — Logistics Tech", kw:'"partnerships" AND ("logistics" OR "supply chain" OR "last mile")',              desc:"İstanbul · lojistik" },
-  { name:"Account Manager — Delivery",    kw:'"account manager" AND ("delivery" OR "logistics" OR "fulfillment")',            desc:"İstanbul · On-site+Hybrid" },
-  { name:"BD — OTA/Hotel Platform",       kw:'"business development" AND ("hotel" OR "accommodation" OR "travel platform")',   desc:"İstanbul · seyahat platformu" },
+  { name:"BD Travel Tech",                kw:"business development travel",    desc:"İstanbul · On-site+Hybrid" },
+  { name:"Partnerships Logistics",        kw:"partnerships logistics",         desc:"İstanbul · lojistik" },
+  { name:"Account Manager Logistics",     kw:"account manager logistics",      desc:"İstanbul · On-site+Hybrid" },
+  { name:"BD Delivery Platform",          kw:"business development delivery",  desc:"İstanbul · On-site+Hybrid" },
 ];
 
 // ── ATS QUERIES ────────────────────────────────────────────────────
+// Lokasyon: "istanbul" OR "turkey" OR "türkiye" — üçü birden
+// No AND/OR between phrases within same () group — space acts as implicit AND
+// Groups connected with OR work fine in Google
+
 var ATS_Q = [
   { name:"BD & Partnerships — 7 ATS",
-    q:'(site:greenhouse.io OR site:lever.co OR site:workable.com OR site:ashbyhq.com OR site:jobs.smartrecruiters.com OR site:careers.teamtailor.com OR site:recruitee.com) ("istanbul" OR "turkey") ("business development" OR "partnerships")' },
+    q:'(site:greenhouse.io OR site:lever.co OR site:workable.com OR site:ashbyhq.com OR site:jobs.smartrecruiters.com OR site:careers.teamtailor.com OR site:recruitee.com) ("istanbul" OR "turkey" OR "türkiye") ("business development" OR "partnerships")'
+  },
   { name:"KAM / Commercial / Category — 7 ATS",
-    q:'(site:greenhouse.io OR site:lever.co OR site:workable.com OR site:ashbyhq.com OR site:jobs.smartrecruiters.com OR site:careers.teamtailor.com OR site:recruitee.com) ("istanbul" OR "turkey") ("account manager" OR "key account" OR "commercial manager" OR "category manager")' },
+    q:'(site:greenhouse.io OR site:lever.co OR site:workable.com OR site:ashbyhq.com OR site:jobs.smartrecruiters.com OR site:careers.teamtailor.com OR site:recruitee.com) ("istanbul" OR "turkey" OR "türkiye") ("account manager" OR "commercial manager" OR "category manager")'
+  },
   { name:"E-commerce & Marketplace — ATS",
-    q:'(site:greenhouse.io OR site:lever.co OR site:workable.com OR site:ashbyhq.com OR site:jobs.smartrecruiters.com) ("istanbul" OR "turkey") ("ecommerce" OR "marketplace" OR "vendor manager" OR "seller success")' },
+    q:'(site:greenhouse.io OR site:lever.co OR site:workable.com OR site:ashbyhq.com OR site:jobs.smartrecruiters.com) ("istanbul" OR "turkey" OR "türkiye") ("ecommerce" OR "marketplace" OR "vendor manager")'
+  },
   { name:"Fintech & Payments — yeni nesil",
-    q:'(site:greenhouse.io OR site:lever.co OR site:ashbyhq.com OR site:jobs.smartrecruiters.com OR site:careers.teamtailor.com) ("istanbul" OR "turkey") ("fintech" OR "payments" OR "embedded finance" OR "neobank" OR "acquiring") ("business development" OR "partnerships" OR "account manager") -"CFA" -"compliance officer" -"treasury"' },
+    q:'(site:greenhouse.io OR site:lever.co OR site:ashbyhq.com OR site:jobs.smartrecruiters.com OR site:careers.teamtailor.com) ("istanbul" OR "turkey" OR "türkiye") ("fintech" OR "payments" OR "acquiring") ("business development" OR "partnerships" OR "account manager") -"CFA" -"treasury"'
+  },
   { name:"SaaS / B2B Tech BD — ATS",
-    q:'(site:greenhouse.io OR site:lever.co OR site:ashbyhq.com OR site:recruitee.com OR site:careers.teamtailor.com) ("istanbul" OR "turkey") ("saas" OR "platform" OR "software") ("business development" OR "partnerships" OR "account executive" OR "partner manager")' },
+    q:'(site:greenhouse.io OR site:lever.co OR site:ashbyhq.com OR site:recruitee.com OR site:careers.teamtailor.com) ("istanbul" OR "turkey" OR "türkiye") ("saas" OR "platform") ("business development" OR "partnerships" OR "account manager")'
+  },
   { name:"AdTech / MarTech / Retail Media — ATS",
-    q:'(site:greenhouse.io OR site:lever.co OR site:ashbyhq.com OR site:jobs.smartrecruiters.com) ("istanbul" OR "turkey") ("adtech" OR "martech" OR "retail media" OR "advertising platform" OR "programmatic") ("business development" OR "partnerships" OR "account manager")' },
-  { name:"Travel Tech / Logistics / Delivery — ATS",
-    q:'(site:greenhouse.io OR site:lever.co OR site:workable.com OR site:jobs.smartrecruiters.com OR site:careers.teamtailor.com) ("istanbul" OR "turkey") ("travel tech" OR "logistics" OR "last mile" OR "delivery") ("business development" OR "partnerships" OR "account manager")' },
+    q:'(site:greenhouse.io OR site:lever.co OR site:ashbyhq.com OR site:jobs.smartrecruiters.com) ("istanbul" OR "turkey" OR "türkiye") ("adtech" OR "retail media" OR "programmatic") ("business development" OR "partnerships" OR "account manager")'
+  },
+  { name:"Travel Tech / Logistics — ATS",
+    q:'(site:greenhouse.io OR site:lever.co OR site:workable.com OR site:jobs.smartrecruiters.com OR site:careers.teamtailor.com) ("istanbul" OR "turkey" OR "türkiye") ("travel" OR "logistics" OR "delivery") ("business development" OR "partnerships" OR "account manager")'
+  },
 ];
 
 // ── INURL QUERIES ──────────────────────────────────────────────────
 var INURL_Q = [
   { name:"BD & Partnerships — career subpages",
-    q:'("istanbul" OR "turkey") (inurl:careers OR inurl:jobs OR inurl:join-us) ("business development" OR "partnerships") -site:linkedin.com -site:greenhouse.io -site:lever.co' },
+    q:'("istanbul" OR "turkey" OR "türkiye") (inurl:careers OR inurl:jobs OR inurl:join-us) ("business development" OR "partnerships") -site:linkedin.com -site:greenhouse.io -site:lever.co'
+  },
   { name:"KAM / Commercial — career subpages",
-    q:'("istanbul" OR "turkey") (inurl:careers OR inurl:jobs) ("account manager" OR "commercial manager" OR "key account" OR "category manager") -site:linkedin.com -site:indeed.com' },
+    q:'("istanbul" OR "turkey" OR "türkiye") (inurl:careers OR inurl:jobs) ("account manager" OR "commercial manager" OR "category manager") -site:linkedin.com -site:indeed.com'
+  },
   { name:"SaaS / Tech BD — career subpages",
-    q:'("istanbul" OR "turkey") (inurl:careers OR inurl:jobs) ("saas" OR "platform" OR "software") ("business development" OR "partnerships" OR "account manager") -site:linkedin.com' },
+    q:'("istanbul" OR "turkey" OR "türkiye") (inurl:careers OR inurl:jobs) ("saas" OR "platform") ("business development" OR "partnerships") -site:linkedin.com'
+  },
   { name:"Fintech — career subpages",
-    q:'("istanbul" OR "turkey") (inurl:careers OR inurl:jobs) ("fintech" OR "payments" OR "acquiring" OR "neobank") ("business development" OR "partnerships" OR "account manager") -site:linkedin.com -"CFA" -"finance degree"' },
+    q:'("istanbul" OR "turkey" OR "türkiye") (inurl:careers OR inurl:jobs) ("fintech" OR "payments" OR "acquiring") ("business development" OR "partnerships") -site:linkedin.com -"CFA"'
+  },
   { name:"AdTech / MarTech — career subpages",
-    q:'("istanbul" OR "turkey") (inurl:careers OR inurl:jobs) ("adtech" OR "martech" OR "retail media" OR "digital advertising") ("business development" OR "partnerships") -site:linkedin.com' },
-  { name:"Travel / Logistics / Delivery — career subpages",
-    q:'("istanbul" OR "turkey") (inurl:careers OR inurl:jobs) ("travel tech" OR "logistics" OR "delivery" OR "last mile") ("business development" OR "partnerships" OR "account manager") -site:linkedin.com' },
+    q:'("istanbul" OR "turkey" OR "türkiye") (inurl:careers OR inurl:jobs) ("adtech" OR "retail media" OR "digital advertising") ("business development" OR "partnerships") -site:linkedin.com'
+  },
+  { name:"Travel / Logistics — career subpages",
+    q:'("istanbul" OR "turkey" OR "türkiye") (inurl:careers OR inurl:jobs) ("travel" OR "logistics" OR "delivery") ("business development" OR "account manager") -site:linkedin.com'
+  },
 ];
 
-// ── COMPANY CAREERS ────────────────────────────────────────────────
+// ── COMPANIES ──────────────────────────────────────────────────────
 var COMPANIES = [
   { name:"Mastercard TR",    badge:"badge-co", url:"https://careers.mastercard.com/us/en/search-results?keywords=istanbul" },
   { name:"Visa TR",          badge:"badge-co", url:"https://corporate.visa.com/en/jobs.html" },
@@ -307,58 +338,57 @@ var COMPANIES = [
   { name:"Iyzico",           badge:"badge-ats", url:"https://iyzico.com/en/careers" },
   { name:"Getir",            badge:"badge-ats", url:"https://getir.com/en/careers/" },
   { name:"Turkcell Kariyer", badge:"badge-ats", url:"https://www.turkcell.com.tr/kurumsal/hakkimizda/kariyer" },
-  { name:"Insider",          badge:"badge-ats", url:"https://useinsider.com/careers/" },
 ];
 
-// ── KEYWORD GROUPS ─────────────────────────────────────────────────
+// ── KEYWORD BUILDER GROUPS ─────────────────────────────────────────
 var KW_ROLE   = ["business development","partnerships","key account manager","commercial manager","category manager","channel manager","account manager","vendor manager","partner manager","account executive"];
-var KW_SECTOR = ["ecommerce","marketplace","fintech","payments","saas","platform","adtech","martech","retail media","travel tech","logistics","acquiring","embedded finance","neobank","digital advertising","b2b tech"];
-var KW_LOC    = ["istanbul","turkey"];
+var KW_SECTOR = ["ecommerce","marketplace","fintech","payments","saas","platform","adtech","retail media","travel tech","logistics","acquiring","embedded finance","neobank","digital advertising","b2b tech"];
+var KW_LOC    = ['"istanbul"', '"turkey"', '"türkiye"', '"istanbul" OR "turkey"', '"istanbul" OR "turkey" OR "türkiye"'];
 var KW_ATS    = ["site:greenhouse.io","site:lever.co","site:workable.com","site:ashbyhq.com","site:jobs.smartrecruiters.com","site:careers.teamtailor.com","site:recruitee.com"];
-var KW_NEG    = ["-remote","-\"fully remote\"","-\"CFA\"","-\"finance degree\"","-\"treasury\"","-\"compliance officer\"","-blog","-intitle:jobs"];
+var KW_NEG    = ['-"remote only"','-"CFA"','-"finance degree"','-"treasury"','-"compliance officer"','-blog','-intitle:jobs'];
 
 // ── HELPERS ────────────────────────────────────────────────────────
-function gUrl(q){ return "https://www.google.com/search?q="+encodeURIComponent(q); }
-function openUrl(url){ window.open(url,"_blank","noopener,noreferrer"); }
+function gUrl(q) { return "https://www.google.com/search?q=" + encodeURIComponent(q); }
+function openUrl(url) { window.open(url, "_blank", "noopener,noreferrer"); }
 
-function copyText(text,btn){
-  var done=function(){ if(btn) flashBtn(btn); };
-  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(text,btn); }); }
-  else{ fallback(text,btn); }
+function copyText(text, btn) {
+  var done = function() { if (btn) flashBtn(btn); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(function() { fallback(text, btn); });
+  } else { fallback(text, btn); }
 }
-function fallback(text,btn){
-  var ta=document.createElement("textarea"); ta.value=text; ta.style.cssText="position:fixed;opacity:0;top:0;left:0;width:1px;height:1px;";
+function fallback(text, btn) {
+  var ta = document.createElement("textarea");
+  ta.value = text; ta.style.cssText = "position:fixed;opacity:0;top:0;left:0;width:1px;height:1px;";
   document.body.appendChild(ta); ta.focus(); ta.select();
-  try{ document.execCommand("copy"); } catch(e){}
-  document.body.removeChild(ta); if(btn) flashBtn(btn);
+  try { document.execCommand("copy"); } catch(e) {}
+  document.body.removeChild(ta); if (btn) flashBtn(btn);
 }
-function flashBtn(btn){
-  var orig=btn.textContent; btn.textContent="Kopyalandı!"; btn.classList.add("success");
-  setTimeout(function(){ btn.textContent=orig; btn.classList.remove("success"); },1600);
+function flashBtn(btn) {
+  var orig = btn.textContent; btn.textContent = "Kopyalandı!"; btn.classList.add("success");
+  setTimeout(function() { btn.textContent = orig; btn.classList.remove("success"); }, 1600);
 }
 
 // ── RENDER LI GRID ─────────────────────────────────────────────────
-function renderLiGrid(gridId, items, tpr){
-  var el=document.getElementById(gridId); el.innerHTML="";
-  items.forEach(function(item){
-    var url=liUrl(item.kw, tpr);
-    var div=document.createElement("div"); div.className="card";
-    div.innerHTML='<div class="card-top"><span class="card-name">'+item.name+'</span><span class="badge badge-li">LinkedIn</span></div><div class="card-desc">'+item.desc+'</div>';
-    div.addEventListener("click",function(){ openUrl(url); });
+function renderLiGrid(gridId, items, tpr) {
+  var el = document.getElementById(gridId); el.innerHTML = "";
+  items.forEach(function(item) {
+    var url = liUrl(item.kw, item.loc || "ist", tpr);
+    var div = document.createElement("div"); div.className = "card";
+    div.innerHTML = '<div class="card-top"><span class="card-name">' + item.name + '</span><span class="badge badge-li">LinkedIn</span></div><div class="card-desc">' + item.desc + '</div>';
+    div.addEventListener("click", function() { openUrl(url); });
     el.appendChild(div);
   });
 }
 
-// ── TIME TABS (generic) ────────────────────────────────────────────
-function makeTabs(tabsId, onChange){
-  var el=document.getElementById(tabsId); el.innerHTML="";
-  var idx=0;
-  TIME.forEach(function(opt,i){
-    var btn=document.createElement("div"); btn.className="ttab"+(i===0?" on":"");
-    btn.textContent=opt.label;
-    btn.addEventListener("click",function(){
-      idx=i;
-      el.querySelectorAll(".ttab").forEach(function(b,j){ b.className="ttab"+(j===i?" on":""); });
+// ── TIME TABS ──────────────────────────────────────────────────────
+function makeTabs(tabsId, onChange) {
+  var el = document.getElementById(tabsId); el.innerHTML = "";
+  TIME.forEach(function(opt, i) {
+    var btn = document.createElement("div"); btn.className = "ttab" + (i === 0 ? " on" : "");
+    btn.textContent = opt.label;
+    btn.addEventListener("click", function() {
+      el.querySelectorAll(".ttab").forEach(function(b, j) { b.className = "ttab" + (j === i ? " on" : ""); });
       onChange(opt);
     });
     el.appendChild(btn);
@@ -366,120 +396,124 @@ function makeTabs(tabsId, onChange){
 }
 
 // ── RENDER COMPANIES ───────────────────────────────────────────────
-function renderCompanies(){
-  var el=document.getElementById("grid-companies");
-  COMPANIES.forEach(function(item){
-    var div=document.createElement("div"); div.className="card";
-    div.innerHTML='<div class="card-top"><span class="card-name">'+item.name+'</span><span class="badge '+item.badge+'">Career</span></div>';
-    div.addEventListener("click",function(){ openUrl(item.url); });
+function renderCompanies() {
+  var el = document.getElementById("grid-companies");
+  COMPANIES.forEach(function(item) {
+    var div = document.createElement("div"); div.className = "card";
+    div.innerHTML = '<div class="card-top"><span class="card-name">' + item.name + '</span><span class="badge ' + item.badge + '">Career</span></div>';
+    div.addEventListener("click", function() { openUrl(item.url); });
     el.appendChild(div);
   });
 }
 
 // ── RENDER QUERY LIST ──────────────────────────────────────────────
-function renderQueryList(listId, queries, after){
-  var el=document.getElementById(listId); el.innerHTML="";
-  queries.forEach(function(item){
-    var finalQ=after ? item.q+" "+after : item.q;
-    var div=document.createElement("div"); div.className="query-box";
-    var copyBtn=document.createElement("button"); copyBtn.textContent="Kopyala";
-    var openBtn=document.createElement("button"); openBtn.textContent="Google ↗"; openBtn.className="primary";
-    (function(q,b1,b2){
-      b1.addEventListener("click",function(){ copyText(q,b1); });
-      b2.addEventListener("click",function(){ openUrl(gUrl(q)); });
-    })(finalQ,copyBtn,openBtn);
-    var head=document.createElement("div"); head.className="query-head";
-    var ns=document.createElement("span"); ns.className="query-name"; ns.textContent=item.name;
-    var br=document.createElement("div"); br.className="btn-row"; br.appendChild(copyBtn); br.appendChild(openBtn);
+function renderQueryList(listId, queries, after) {
+  var el = document.getElementById(listId); el.innerHTML = "";
+  queries.forEach(function(item) {
+    var finalQ = after ? item.q + " " + after : item.q;
+    var div = document.createElement("div"); div.className = "query-box";
+    var copyBtn = document.createElement("button"); copyBtn.textContent = "Kopyala";
+    var openBtn = document.createElement("button"); openBtn.textContent = "Google ↗"; openBtn.className = "primary";
+    (function(q, b1, b2) {
+      b1.addEventListener("click", function() { copyText(q, b1); });
+      b2.addEventListener("click", function() { openUrl(gUrl(q)); });
+    })(finalQ, copyBtn, openBtn);
+    var head = document.createElement("div"); head.className = "query-head";
+    var ns = document.createElement("span"); ns.className = "query-name"; ns.textContent = item.name;
+    var br = document.createElement("div"); br.className = "btn-row"; br.appendChild(copyBtn); br.appendChild(openBtn);
     head.appendChild(ns); head.appendChild(br);
-    var qt=document.createElement("div"); qt.className="query-text"; qt.textContent=finalQ;
+    var qt = document.createElement("div"); qt.className = "query-text"; qt.textContent = finalQ;
     div.appendChild(head); div.appendChild(qt); el.appendChild(div);
   });
 }
 
 // ── KEYWORD BUILDER ────────────────────────────────────────────────
-var activeKws=[]; var activeNegs=[]; var builderTime=TIME[0];
+var activeKws = []; var activeNegs = []; var builderTime = TIME[0];
 
-function renderKwGroup(elId,words,isNeg){
-  var row=document.getElementById(elId);
-  words.forEach(function(kw){
-    var span=document.createElement("span"); span.className="kw"; span.textContent=kw;
-    span.addEventListener("click",function(){
-      var arr=isNeg?activeNegs:activeKws;
-      var i=arr.indexOf(kw);
-      if(i>-1){ arr.splice(i,1); span.classList.remove("on"); }
-      else{ arr.push(kw); span.classList.add("on"); }
+function renderKwGroup(elId, words, isNeg) {
+  var row = document.getElementById(elId);
+  words.forEach(function(kw) {
+    var span = document.createElement("span"); span.className = "kw"; span.textContent = kw;
+    span.addEventListener("click", function() {
+      var arr = isNeg ? activeNegs : activeKws;
+      var i = arr.indexOf(kw);
+      if (i > -1) { arr.splice(i, 1); span.classList.remove("on"); }
+      else { arr.push(kw); span.classList.add("on"); }
       updateBuilder();
     });
     row.appendChild(span);
   });
 }
-function updateBuilder(){
-  var el=document.getElementById("builder-out");
-  var parts=activeKws.map(function(k){ return k.indexOf("site:")===0?k:'"'+k+'"'; });
-  var all=parts.concat(activeNegs);
-  if(all.length===0){ el.textContent="Keyword seçin..."; return; }
-  var q=all.join(" ");
-  el.textContent=builderTime.after ? q+" "+builderTime.after : q;
+
+function updateBuilder() {
+  var el = document.getElementById("builder-out");
+  // Lokasyon keyword'leri zaten quote içinde geliyor (örn: '"istanbul"')
+  // Diğerleri phrase olarak quote'a alınıyor
+  var parts = activeKws.map(function(k) {
+    if (k.charAt(0) === '"') return k; // already quoted (loc options)
+    if (k.indexOf("site:") === 0) return k; // ATS platform
+    return '"' + k + '"';
+  });
+  var all = parts.concat(activeNegs);
+  if (all.length === 0) { el.textContent = "Keyword seçin..."; return; }
+  var q = all.join(" ");
+  el.textContent = builderTime.after ? q + " " + builderTime.after : q;
 }
-function copyBuilder(){
-  var q=document.getElementById("builder-out").textContent;
-  if(!q||q==="Keyword seçin...") return;
-  copyText(q,document.getElementById("copy-builder-btn"));
-  var fb=document.getElementById("builder-feedback"); fb.textContent="Kopyalandı! Google'a yapıştırabilirsin.";
-  setTimeout(function(){ fb.textContent=""; },2000);
+
+function copyBuilder() {
+  var q = document.getElementById("builder-out").textContent;
+  if (!q || q === "Keyword seçin...") return;
+  copyText(q, document.getElementById("copy-builder-btn"));
+  var fb = document.getElementById("builder-feedback");
+  fb.textContent = "Kopyalandı! Google'a yapıştırabilirsin.";
+  setTimeout(function() { fb.textContent = ""; }, 2000);
 }
-function openBuilder(){
-  var q=document.getElementById("builder-out").textContent;
-  if(!q||q==="Keyword seçin...") return;
+function openBuilder() {
+  var q = document.getElementById("builder-out").textContent;
+  if (!q || q === "Keyword seçin...") return;
   openUrl(gUrl(q));
 }
-function clearBuilder(){
-  activeKws=[]; activeNegs=[];
-  document.querySelectorAll(".kw.on").forEach(function(el){ el.classList.remove("on"); });
-  builderTime=TIME[0];
-  document.querySelectorAll("#tabs-builder .ttab").forEach(function(b,j){ b.className="ttab"+(j===0?" on":""); });
+function clearBuilder() {
+  activeKws = []; activeNegs = [];
+  document.querySelectorAll(".kw.on").forEach(function(el) { el.classList.remove("on"); });
+  builderTime = TIME[0];
+  document.querySelectorAll("#tabs-builder .ttab").forEach(function(b, j) {
+    b.className = "ttab" + (j === 0 ? " on" : "");
+  });
   updateBuilder();
 }
 
 // ── INIT ───────────────────────────────────────────────────────────
-
-// LinkedIn sections with independent time tabs
-(function(){
-  var sections=[
-    {tabs:"tabs-bd",     grid:"grid-bd",     data:BD},
-    {tabs:"tabs-kam",    grid:"grid-kam",    data:KAM},
-    {tabs:"tabs-fintech",grid:"grid-fintech",data:FINTECH},
-    {tabs:"tabs-saas",   grid:"grid-saas",   data:SAAS},
-    {tabs:"tabs-adtech", grid:"grid-adtech", data:ADTECH},
-    {tabs:"tabs-travel", grid:"grid-travel", data:TRAVEL},
+(function() {
+  var sections = [
+    { tabs:"tabs-bd",     grid:"grid-bd",     data:BD },
+    { tabs:"tabs-kam",    grid:"grid-kam",    data:KAM },
+    { tabs:"tabs-fintech",grid:"grid-fintech",data:FINTECH },
+    { tabs:"tabs-saas",   grid:"grid-saas",   data:SAAS },
+    { tabs:"tabs-adtech", grid:"grid-adtech", data:ADTECH },
+    { tabs:"tabs-travel", grid:"grid-travel", data:TRAVEL },
   ];
-  sections.forEach(function(s){
-    renderLiGrid(s.grid, s.data, "");
-    makeTabs(s.tabs, function(opt){
-      renderLiGrid(s.grid, s.data, opt.tpr);
-    });
+  sections.forEach(function(s) {
+    renderLiGrid(s.grid, s.data, TIME[0].tpr); // default: Son 24 sa
+    makeTabs(s.tabs, function(opt) { renderLiGrid(s.grid, s.data, opt.tpr); });
   });
 })();
 
 renderCompanies();
 
-// ATS queries
-(function(){
-  var after="";
+(function() {
+  var after = TIME[0].after;
   renderQueryList("list-ats", ATS_Q, after);
-  makeTabs("tabs-ats", function(opt){ after=opt.after; renderQueryList("list-ats", ATS_Q, after); });
+  makeTabs("tabs-ats", function(opt) { after = opt.after; renderQueryList("list-ats", ATS_Q, after); });
 })();
 
-// inurl queries
-(function(){
-  var after="";
+(function() {
+  var after = TIME[0].after;
   renderQueryList("list-inurl", INURL_Q, after);
-  makeTabs("tabs-inurl", function(opt){ after=opt.after; renderQueryList("list-inurl", INURL_Q, after); });
+  makeTabs("tabs-inurl", function(opt) { after = opt.after; renderQueryList("list-inurl", INURL_Q, after); });
 })();
 
-// Builder
-makeTabs("tabs-builder", function(opt){ builderTime=opt; updateBuilder(); });
+makeTabs("tabs-builder", function(opt) { builderTime = opt; updateBuilder(); });
 renderKwGroup("kw-role",   KW_ROLE,   false);
 renderKwGroup("kw-sector", KW_SECTOR, false);
 renderKwGroup("kw-loc",    KW_LOC,    false);
